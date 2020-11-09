@@ -2868,15 +2868,15 @@ function render_list($path = '', $files = '')
 
     if ($_SERVER['admin']||!getConfig('disableChangeTheme')) {
         $theme_arr = scandir(__DIR__ . $slash . 'theme');
-        $html .= '
+        $themeSelect = '
 <div style="position: fixed;right: 10px;bottom: 10px;/*color: rgba(247,247,249,0);*/">
     <select name="theme" onchange="changetheme(this.options[this.options.selectedIndex].value)">
-        <option value="">'.getconstStr('Theme').'</option>';
+        <option value="">' . getconstStr('Theme') . '</option>';
         foreach ($theme_arr as $v1) {
-            if ($v1!='.' && $v1!='..') $html .= '
-        <option value="'.$v1.'"'.($v1==$theme?' selected="selected"':'').'>'.$v1.'</option>';
+            if ($v1!='.' && $v1!='..') $themeSelect .= '
+        <option value="' . $v1 . '"' . ($v1==$theme?' selected="selected"':'') . '>' . $v1 . '</option>';
         }
-        $html .= '
+        $themeSelect .= '
     </select>
 </div>
 <script type="text/javascript">
@@ -2888,7 +2888,9 @@ function render_list($path = '', $files = '')
         document.cookie=\'theme=\'+str+\'; path=/; \'+expires;
         location.href = location.href;
     }
-</script>';
+</script>
+</html>';
+        $html = str_replace('</html>', $themeSelect, $html);
     }
 
     $html = $authinfo . $html;
