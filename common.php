@@ -2893,7 +2893,7 @@ function render_list($path = '', $files = '')
         $html = str_replace('</html>', $themeSelect, $html);
     }
 
-    $html = $authinfo . $html;
+    //$html = $authinfo . $html;
     if (isset($_SERVER['Set-Cookie'])) return output($html, $statusCode, [ 'Set-Cookie' => $_SERVER['Set-Cookie'], 'Content-Type' => 'text/html' ]);
     return output($html,$statusCode);
 }
